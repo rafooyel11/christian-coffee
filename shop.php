@@ -37,6 +37,13 @@ $products = $stmt->fetchAll();
     </nav>
 
     <div class="container" style="margin-top: 100px; padding-bottom: 2rem;">
+        
+        <?php if (isset($_GET['search'])): ?>
+        <div class="alert">
+            You searched for: <?php echo $_GET['search']; ?> 
+        </div>
+        <?php endif; ?>
+
         <h1 style="text-align: center; color: #2c1810; margin-bottom: 2rem;">Our Coffee Collection</h1>
         
         <div class="products-grid">
@@ -44,9 +51,9 @@ $products = $stmt->fetchAll();
                 <div class="product-card">
                     <img src="images/<?php echo $product['image']; ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" onerror="this.src='images/placeholder.jpg'">
                     <div class="product-info">
-                        <h3><?php echo htmlspecialchars($product['name']); ?></h3>
+                        <h3><?php echo $product['name']; ?></h3>
                         <p class="price"><?php echo formatPrice($product['price']); ?></p>
-                        <p class="description"><?php echo htmlspecialchars($product['description']); ?></p>
+                        <p class="description"><?php echo $product['description']; ?></p>
                         
                         <div class="stock-info">
                             <?php if ($product['quantity'] > 0): ?>
